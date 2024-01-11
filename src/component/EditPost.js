@@ -25,37 +25,31 @@ function EditPost(props) {
                         type="text" 
                         className="form-control" 
                         placeholder="Image"
-                        onChange={e => {setState(prevState => ({
-                            ...prevState, image: e.target.value })
-                            )}}
                         value={state.image}
-                        readOnly={false} 
-                        disabled={false}
+                        onChange={e => {setState(prevState => ({
+                        ...prevState, image: e.target.value })
+                        )}}
                         required />
                 </div>
                 <div className="mb-3">
                     <input 
                         type="text" 
                         className="form-control" 
-                        placeholder="Title" 
+                        placeholder="Title"
+                        value={state.title}
                         onChange={e => {setState(prevState => ({
-                            ...prevState, title: e.target.value })
-                            )}}
-                        value={state.title} 
-                        readOnly={false} 
-                        disabled={false}
+                        ...prevState, title: e.target.value })
+                        )}}
                         required />
                 </div>
                 <div className="mb-3">
                     <input 
                         type="text" className="form-control" 
-                        placeholder="Description" 
+                        placeholder="Description"
+                        value={state.description}
                         onChange={e => {setState(prevState => ({
-                            ...prevState, description: e.target.value })
-                            )}}
-                        value={state.description} 
-                        readOnly={false} 
-                        disabled={false}
+                        ...prevState, description: e.target.value })
+                        )}}
                         required />
                 </div>
                 <button type="submit" className="btn float-end btn-primary btn sm">Update</button>

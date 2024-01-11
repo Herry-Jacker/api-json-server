@@ -1,31 +1,24 @@
-import React, {useState} from "react";
+import React, {useState, createRef } from "react";
 import { useNavigate } from "react-router-dom";
  
 function AddPost(props) {
-    const [image, setImage] = useState('');
-    const [title, settitle] = useState('');
-    const [description, setdescription] = useState('');
+    const imageRef = createRef();
+    const titleRef = createRef();
+    const descriptionRef = createRef();
     const navigate = useNavigate();
-
-    const imageChangeHandler = (e) => {
-        setImage(e.target.value) 
-    };
-    const titleChangeHandler = (e) => {
-        settitle(e.target.value) 
-    };
-    const descriptionChangeHandler = (e) => {
-        setdescription(e.target.value) 
-    };
 
     const submitHandler = (e) => {
         e.preventDefault();
         let post = {
-            id: "", title, image, description
+            id: "",
+            title: titleRef.current.value,
+            image: imageRef.current.value,
+            description: descriptionRef.current.value
         }
         props.addPost(post);
-        setImage("");
-        settitle("");
-        setdescription("");
+        titleRef.current.value = "";
+        imageRef.current.value = "";
+        descriptionRef.current.value = "";
         navigate("/");
     }
 
@@ -33,13 +26,13 @@ function AddPost(props) {
         <div className="card bg-dark p-3 my-3">
             <form onSubmit={submitHandler}>
                 <div className="mb-3">
-                    <input type="text" className="form-control" placeholder="Image" id="image" onChange={imageChangeHandler} required />
+                    <input type="text" className="form-control" placeholder="Image" id="image" required ref={imageRef}/>
                 </div>
                 <div className="mb-3">
-                    <input type="text" className="form-control" placeholder="Title" id="title" onChange={titleChangeHandler} required />
+                    <input type="text" className="form-control" placeholder="Title" id="title" required ref={titleRef}/>
                 </div>
                 <div className="mb-3">
-                    <input type="text" className="form-control" placeholder="Description" id="description" onChange={descriptionChangeHandler} required />
+                    <input type="text" className="form-control" placeholder="Description" id="description" required ref={descriptionRef}/>
                 </div>
                 <button type="submit" className="btn float-end btn-primary btn sm">Add</button>
             </form>
